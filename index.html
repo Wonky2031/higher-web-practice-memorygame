@@ -1,18 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Игра память</title>
-    <link
-      rel="stylesheet"
-      href="./style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="body">
-    <script
-      type="text/javascript"
-      src="./game.js"></script>
+    <main class="game__window">
+      <header class="header">
+        <h1 class="header__title">Игра "Память"</h1>
+      </header>
+      <div class="game__content">
+        <section class="settings__section">
+          <div class="settings__group">
+            <h2 class="settings__title">Режим игры</h2>
+            <select class="gamemode__selector selector" id="gamemode">
+              <option value="" disabled>Выберите режим</option>
+              <option value="gamemode_free" selected>Простой</option>
+              <option value="gamemode_attempts">На количество попыток</option>
+              <option value="gamemode_time">На время</option>
+            </select>
+          </div>
+          <div class="settings__group">
+            <h2 class="settings__title">Уровень сложности</h2>
+            <select class="difficulty__selector selector" id="difficulty">
+              <option value="" disabled selected>Выберите сложность</option>
+              <option value="difficulty_easy" selected>Лёгкий</option>
+              <option value="difficulty_medium">Средний</option>
+              <option value="difficulty_hard">Сложный</option>
+            </select>
+          </div>
+          <button class="start__button" disabled>Начать игру</button>
+          <div class="settings__group best__results">
+            <h2 class="best__results-title">Лучшие результаты</h2>
+            <ul class="best__results-list">
+              Пока нет результатов в других режимах
+            </ul>
+          </div>
+        </section>
+        <section class="playground__section">
+          <p class="point__counter">
+            Найдено пар:<br />
+            <span class="point__counter-value">0</span>
+          </p>
+          <span class="game__timer">00:00</span>
+          <div class="cards__grid"></div>
+          <div class="ingame__buttons">
+            <button class="ingame__buttons-restart">Сначала</button>
+            <button class="ingame__buttons-change-mode">Сменить режим</button>
+          </div>
+        </section>
+        <section class="result__section">
+          <h2 class="result__title">Поздравляем! Вы выиграли!</h2>
+          <h3 class="attempts__amount">Попытки: 11</h3>
+          <button class="restart__game">Играть снова</button>
+          <button class="open__menu">Вернуться в меню</button>
+        </section>
+      </div>
+    </main>
+    <script type="text/javascript" src="./game.js"></script>
   </body>
 </html>

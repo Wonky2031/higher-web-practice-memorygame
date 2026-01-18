@@ -1,19 +1,321 @@
-/* Базовые стили */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   --main-color: rgba(8, 12, 22, 0.862);
   --lighten-main-color: rgba(11, 20, 42, 0.775);
   --card-front-color: #293852;
-  --accent-color: #0f1f4a;  /* также используется для цвета задней стороны карточки */
-  --lighten-accent-color: #2f5eac; /* также используется для цвета перевернутой карточки */
+  --accent-color: #0f1f4a;
+  --lighten-accent-color: #2f5eac;
   --select-color: #162859;
   --body-background: linear-gradient(
     135deg,
     var(--lighten-main-color) 0%,
     var(--main-color) 100%
   );
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  padding:16px 0 100% 0;
+  background: var(--body-background);
+}
+
+.game__window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 675px;
+  height: fit-content;
+  margin:auto;
+  border-radius: 16px;
+  padding: 16px;
+  background-color: var(--main-color);
+}
+
+h1 {
+  font-size: 34px;
+  letter-spacing: -0.2px;
+}
+
+.game__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.settings__section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "mode difficulty"
+    "button button"
+    "best-results best-results";
+  justify-items: center;
+  row-gap: 32px;
+  column-gap: 16px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.settings__group {
+  width: 100%;
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+  padding: 14px;
+  background-color: var(--lighten-main-color);
+}
+
+.settings__title {
+  justify-self: center;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.selector {
+  width: 100%;
+  height: 34px;
+  margin-top: 6px;
+  border: 1px solid var(--lighten-accent-color);
+  border-radius: 6px;
+  padding: 0 8px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.8px;
+  background-color: var(--select-color);
+}
+
+.gamemode__selector {
+  grid-area: mode;
+}
+
+.difficulty__selector {
+  grid-area: difficulty;
+}
+
+.start__button {
+  grid-area: button;
+  width: 318px;
+  height: 45px;
+  border: none;
+  border-radius: 6px;
+  padding-bottom: 4px;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.2px;
+  background-color: var(--accent-color);
+}
+
+.best__results {
+  display: flex;
+  flex-direction: column;
+  grid-area: best-results;
+  align-items: center;
+  gap: 10px;
+  height: auto;
+  margin-top: 18px;
+  border: 1px solid var(--lighten-accent-color);
+  background-color: var(--accent-color);
+}
+
+.best__results-title {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.best__results-list {
+  align-content: center;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--lighten-accent-color);
+  border-radius: 4px;
+  padding: 0 6px;
+  font-weight: 500;
+  letter-spacing: 0.88px;
+  background-color: var(--select-color);
+}
+
+.best__results-item {
+  width: 100%;
+  padding: 4px 0;
+  font-size: 12px;
+  list-style-type: none;
+}
+
+.playground__section {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.point__counter {
+  width: 100%;
+  margin-top: 18px;
+  border: 1px solid var(--lighten-accent-color);
+  border-radius: 6px;
+  padding: 9px 0;
+  font-weight: 500;
+  font-size: 13px;
+  text-align: center;
+  background-color: var(--accent-color);
+}
+
+.point__counter-value {
+  font-size: 20px;
+}
+
+.game__timer {
+  position: absolute;
+  align-self: flex-end;
+  margin: 95px 16px 0 0;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}
+
+.cards__grid {
+  display: grid;
+  gap: 10px;
+  min-width: 422px;
+  height: fit-content;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+.card {
+  position: relative;
+  align-content: center;
+  width: 98px;
+  height: 98px;
+  border-radius: 6px;
+  text-align: center;
+  background-color: var(--accent-color);
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform: translateZ(150px);
+  transform-origin: center center;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card.matched {
+  opacity: 0.7;
+  filter: brightness(0.8);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  transform: scale(0.95);
+  transform: translateZ(150px);
+  transform: rotateY(180deg);
+  animation: none;
+}
+
+.card.matched {
+  transform: translateZ(150px);
+  cursor: default;
+  pointer-events: none;
+}
+
+.card-back,
+.card-front {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  font-size: 38px;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  border: 2px solid var(--lighten-accent-color);
+  color: white;
+  background-color: var(--accent-color);
+}
+
+.card-front {
+  border: 2px solid var(--card-front-color);
+  color: white;
+  background-color: var(--lighten-accent-color);
+  transform: rotateY(180deg);
+}
+
+.ingame__buttons {
+  display: flex;
+  gap: 12px;
+  align-self: center;
+}
+
+.ingame__buttons button {
+  height: 32px;
+  border: 1px solid var(--lighten-accent-color);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  background-color: var(--accent-color);
+}
+
+.ingame__buttons-restart {
+  width: 80px;
+}
+
+.ingame__buttons-change-mode {
+  width: 118px;
+}
+
+.result__section {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 33px;
+}
+
+.result__title {
+  margin-top: 17px;
+  font-size: 27px;
+}
+
+.attempts__amount {
+  font-size: 20px;
+}
+
+.restart__game {
+  width: 320px;
+  height: 45px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: var(--accent-color);
+}
+
+.open__menu{
+  width: 132px;
+  height: 32px;
+  border: 1px solid var(--card-front-color);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 11px;
+  background-color: var(--accent-color);
+
 }
