@@ -401,7 +401,7 @@ function updateTimeDisplay() {
   if (GAME_STATE.mode === "gamemode_time") {
     const minutes = Math.floor(GAME_STATE.timeLeft / 60);
     const seconds = GAME_STATE.timeLeft % 60;
-    const timeString = `Осталось:<br> ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    const timeString = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
     timerText = `${timeString}`;
 
@@ -412,7 +412,7 @@ function updateTimeDisplay() {
       timer.style.color = "#fff";
     }
   } else if (GAME_STATE.mode === "gamemode_attempts") {
-    timerText = `Попытки:<br> ${GAME_STATE.attemptsLeft}/${GAME_STATE.maxAttempts}`;
+    timerText = `${GAME_STATE.attemptsLeft}/${GAME_STATE.maxAttempts}`;
     if (GAME_STATE.attemptsLeft <= 5) {
       timer.style.color = "#e74c3c";
     } else {

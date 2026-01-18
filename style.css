@@ -11,6 +11,8 @@
     var(--lighten-main-color) 0%,
     var(--main-color) 100%
   );
+  --card-grid-width: 422px;
+  --card-grid-width-mobile: 230px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -21,13 +23,16 @@
 body {
   padding:16px 0 100% 0;
   background: var(--body-background);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .game__window {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 675px;
+  width: 100%;
+  max-width: 675px;
   height: fit-content;
   margin:auto;
   border-radius: 16px;
@@ -38,6 +43,7 @@ body {
 h1 {
   font-size: 34px;
   letter-spacing: -0.2px;
+  text-align: center;
 }
 
 .game__content {
@@ -58,6 +64,18 @@ h1 {
   column-gap: 16px;
   width: 100%;
   margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .settings__section {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "mode"
+      "difficulty"
+      "button"
+      "best-results";
+    gap: 20px;
+  }
 }
 
 .settings__group {
@@ -146,6 +164,7 @@ h1 {
 
 .playground__section {
   display: none;
+  width: 100%;
   flex-direction: column;
   gap: 16px;
 }
@@ -176,20 +195,39 @@ h1 {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .game__timer {
+    margin-top: 95px;
+    font-size: 16px;
+    margin-right: calc((100% - var(--card-grid-width-mobile) - 16*2) / 4);
+  }
+}
+
 .cards__grid {
   display: grid;
   gap: 10px;
-  min-width: 422px;
+  min-width: var(--card-grid-width);
   height: fit-content;
   margin: 0 auto;
   background-color: transparent;
 }
 
+@media (max-width: 768px) {
+  .cards__grid {
+    display: grid;
+    gap: 10px;
+    min-width: var(--card-grid-width-mobile);
+    height: fit-content;
+      margin: 0 auto;
+    background-color: transparent;
+  }
+}
+
 .card {
   position: relative;
   align-content: center;
-  width: 98px;
-  height: 98px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 6px;
   text-align: center;
   background-color: var(--accent-color);
@@ -293,10 +331,23 @@ h1 {
 .result__title {
   margin-top: 17px;
   font-size: 27px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .result__title {
+    font-size: 20px;
+  }
 }
 
 .attempts__amount {
   font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .attempts__amount {
+    font-size: 16px;
+  }
 }
 
 .restart__game {
